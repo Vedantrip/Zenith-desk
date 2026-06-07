@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenith Control Center</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Custom Premium Window Wrapper -->
+  <div class="app-container">
+    
+    <!-- Titlebar (Draggable Region) -->
+    <header class="titlebar">
+      <div class="logo-area">
+        <svg class="logo-icon" viewBox="0 0 24 24" width="22" height="22">
+          <polygon points="12,2 2,22 22,22" stroke="#00f0ff" stroke-width="2" fill="none" />
+          <polygon points="12,7 6,19 18,19" fill="#00f0ff" opacity="0.3" />
+          <circle cx="12" cy="14" r="2" fill="#ff7b00" />
+        </svg>
+        <span class="logo-text">ZENITH <span class="logo-accent">DESK</span></span>
+      </div>
+      <div class="window-controls">
+        <button id="btn-minimize" class="control-btn" title="Minimize">
+          <svg viewBox="0 0 24 24" width="14" height="14"><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+        <button id="btn-maximize" class="control-btn" title="Maximize">
+          <svg viewBox="0 0 24 24" width="14" height="14"><rect x="5" y="5" width="14" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+        </button>
+        <button id="btn-close" class="control-btn close-btn" title="Close to Tray">
+          <svg viewBox="0 0 24 24" width="14" height="14"><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <div class="main-layout">
+      <!-- Sidebar Navigation -->
+      <aside class="sidebar">
+        <nav class="nav-menu">
+          <button class="nav-item active" data-tab="tab-dashboard">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20">
+              <rect x="3" y="3" width="7" height="9" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+              <rect x="14" y="3" width="7" height="5" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+              <rect x="3" y="16" width="7" height="5" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+              <rect x="14" y="12" width="7" height="9" rx="1" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span>Telemetry</span>
+          </button>
+          
+          <button class="nav-item" data-tab="tab-organizer">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20">
+              <path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z" stroke="currentColor" stroke-width="2" fill="none"/>
+              <line x1="12" y1="11" x2="12" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <line x1="9" y1="14" x2="15" y2="14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span>Organizer</span>
+          </button>
+          
+          <button class="nav-item" data-tab="tab-focus">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/>
+              <polyline points="12 6 12 12 16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>Focus Space</span>
+          </button>
+          
+          <button class="nav-item" data-tab="tab-settings">
+            <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20">
+              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2" fill="none"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" stroke="currentColor" stroke-width="2" fill="none"/>
+            </svg>
+            <span>Preference</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="startup-toggle">
+            <span class="startup-label">Auto-Start</span>
+            <label class="switch">
+              <input type="checkbox" id="chk-startup">
+              <span class="slider round"></span>
+            </label>
+          </div>
+          <div class="system-status-indicator">
+            <span class="pulse-dot"></span>
+            <span class="status-text">Zenith Agent Idle</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Viewports Content -->
+      <main class="content-area">
+        
+        <!-- SECTION 1: DASHBOARD / TELEMETRY -->
+        <section id="tab-dashboard" class="tab-content active animate-fade-in">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">System Telemetry</h1>
+              <p class="view-subtitle">Real-time resource logs and AI lag optimizer sweep.</p>
+            </div>
+            <div class="performance-score-card">
+              <div class="score-details">
+                <span class="score-label">Lag Efficiency Index</span>
+                <span class="score-value" id="opt-score-val">92%</span>
+              </div>
+              <div class="score-bar-bg"><div class="score-bar-fill" id="opt-score-bar" style="width: 92%;"></div></div>
+            </div>
+          </div>
+
+          <div class="dashboard-grid">
+            <!-- CPU gauge card -->
+            <div class="glass-card telemetry-card">
+              <h3 class="card-title">CPU Performance</h3>
+              <div class="gauge-container">
+                <svg viewBox="0 0 120 120" class="dial-svg">
+                  <circle cx="60" cy="60" r="50" class="dial-bg"></circle>
+                  <circle cx="60" cy="60" r="50" class="dial-fill cpu-dial" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+                </svg>
+                <div class="gauge-overlay">
+                  <span class="gauge-value" id="cpu-percent">0%</span>
+                  <span class="gauge-lbl">load</span>
+                </div>
+              </div>
+              <div class="telemetry-details">
+                <div class="tel-row"><span>Cores Available:</span><span id="cpu-cores" class="txt-neon">0 Cores</span></div>
+                <div class="tel-row"><span>Base Frequency:</span><span id="cpu-speed">0.0 GHz</span></div>
+              </div>
+            </div>
+
+            <!-- Memory gauge card -->
+            <div class="glass-card telemetry-card">
+              <h3 class="card-title">Memory Allocation</h3>
+              <div class="gauge-container">
+                <svg viewBox="0 0 120 120" class="dial-svg">
+                  <circle cx="60" cy="60" r="50" class="dial-bg"></circle>
+                  <circle cx="60" cy="60" r="50" class="dial-fill ram-dial" stroke-dasharray="314.16" stroke-dashoffset="314.16"></circle>
+                </svg>
+                <div class="gauge-overlay">
+                  <span class="gauge-value" id="ram-percent">0%</span>
+                  <span class="gauge-lbl">allocated</span>
+                </div>
+              </div>
+              <div class="telemetry-details">
+                <div class="tel-row"><span>Active Memory:</span><span id="ram-active" class="txt-neon">0.0 GB</span></div>
+                <div class="tel-row"><span>Total Available:</span><span id="ram-total">0.0 GB</span></div>
+              </div>
+            </div>
+
+            <!-- AI Lag Sweep Card -->
+            <div class="glass-card optimizer-card">
+              <div class="opt-card-header">
+                <div>
+                  <h3 class="card-title">Synapse AI Lag Sweeper</h3>
+                  <p class="card-desc">Scan and terminate memory-hogs, clean cache files, and optimize RAM standby logs.</p>
+                </div>
+                <svg class="ai-shield" viewBox="0 0 24 24" width="28" height="28">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="none" stroke="#00f0ff" stroke-width="2"/>
+                  <polyline points="8 11 11 14 16 9" stroke="#00f0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+              </div>
+
+              <div class="opt-console" id="optimizer-status">
+                <div class="console-line text-secondary">> Synapse Optimizer engine version 2.4 online.</div>
+                <div class="console-line text-secondary">> CPU standby check: Normal.</div>
+                <div class="console-line text-secondary">> Press "Sweep Lag" to start diagnostics.</div>
+              </div>
+
+              <div class="opt-actions">
+                <button id="btn-sweep-lag" class="btn btn-primary btn-glow">
+                  <svg class="spinner-icon" viewBox="0 0 24 24" width="16" height="16" style="display: none;">
+                    <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="3" stroke-dasharray="32" />
+                  </svg>
+                  <span>Sweep Lag Now</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Grid: Oscilloscope and Process allocations -->
+          <div class="dashboard-bottom-grid">
+            <!-- Visual Oscilloscope Chart -->
+            <div class="glass-card chart-card">
+              <h3 class="card-title">Telemetry Oscilloscope</h3>
+              <p class="card-desc">Rolling history logs of active memory and processor optimization sweeps.</p>
+              <div class="chart-container">
+                <canvas id="telemetry-chart"></canvas>
+              </div>
+              <div class="chart-legend">
+                <span class="legend-item"><span class="legend-dot cpu-dot"></span> CPU Load</span>
+                <span class="legend-item"><span class="legend-dot ram-dot"></span> RAM Allocation</span>
+              </div>
+            </div>
+
+            <!-- Process list table -->
+            <div class="glass-card process-card">
+              <h3 class="card-title">Active Memory Allocations</h3>
+              <p class="card-desc">High consumption background processes detected by Zenith Agent.</p>
+              <div class="table-container">
+                <table id="process-table">
+                  <thead>
+                    <tr>
+                      <th>Process Name</th>
+                      <th>PID</th>
+                      <th>CPU Load</th>
+                      <th>Memory Impact</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td colspan="5" class="text-center text-secondary">Loading system processes...</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 2: FOLDER ORGANIZER -->
+        <section id="tab-organizer" class="tab-content animate-fade-in">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">Smart Folder Organizer</h1>
+              <p class="view-subtitle">Auto-categorize and file system declutter operations.</p>
+            </div>
+            <div class="organizer-switch-card">
+              <span class="switch-lbl">Active Auto-Watch</span>
+              <label class="switch">
+                <input type="checkbox" id="chk-organizer-active">
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="organizer-layout">
+            <div class="glass-card organizer-config">
+              <h3 class="card-title">Target Path Configuration</h3>
+              <p class="card-desc">Select which directory the Zenith background agent will sweep and organize.</p>
+              
+              <div class="folder-selector-box">
+                <input type="text" id="txt-organizer-path" readonly placeholder="No target folder selected">
+                <button id="btn-browse-folder" class="btn btn-secondary">Select Folder</button>
+              </div>
+
+              <div class="organizer-rules-section">
+                <h4 class="section-title">Active File Sorting Rules</h4>
+                <div class="rules-grid">
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Documents">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Documents <span class="rule-ext">(.pdf, .docx, .txt)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Images">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Images <span class="rule-ext">(.png, .jpg, .webp)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Videos">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Videos <span class="rule-ext">(.mp4, .mkv, .mov)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Audio">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Audio <span class="rule-ext">(.mp3, .wav, .flac)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Installers">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Installers <span class="rule-ext">(.exe, .msi, .bat)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Archives">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Archives <span class="rule-ext">(.zip, .rar, .7z)</span></span>
+                  </label>
+                  <label class="checkbox-container">
+                    <input type="checkbox" checked id="rule-Code">
+                    <span class="checkmark"></span>
+                    <span class="rule-label">Code <span class="rule-ext">(.js, .py, .html)</span></span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="organizer-actions">
+                <button id="btn-organize-now" class="btn btn-primary btn-glow">Organize Now</button>
+              </div>
+            </div>
+
+            <div class="glass-card organizer-activity">
+              <h3 class="card-title">Filing Log Activity</h3>
+              <p class="card-desc">Audit trail of the most recent folder sorting operations.</p>
+              
+              <div class="activity-log" id="organizer-log">
+                <div class="log-entry log-system">
+                  <span class="log-time">18:35</span>
+                  <span class="log-text">Folder Organizer service initialized. Waiting for task.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 3: FOCUS SPACE -->
+        <section id="tab-focus" class="tab-content animate-fade-in">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">Zen Focus Space</h1>
+              <p class="view-subtitle">High-efficiency work sessions powered by distraction blocking.</p>
+            </div>
+          </div>
+
+          <div class="focus-layout">
+            <!-- Focus Column 1 -->
+            <div class="focus-col">
+              <!-- Focus Timer Circle -->
+              <div class="glass-card focus-timer-card">
+                <h3 class="card-title">Focus Interval</h3>
+                
+                <div class="timer-display-container">
+                  <svg viewBox="0 0 200 200" class="timer-ring-svg">
+                    <circle cx="100" cy="100" r="85" class="timer-ring-bg"></circle>
+                    <circle cx="100" cy="100" r="85" class="timer-ring-fill" stroke-dasharray="534" stroke-dashoffset="0" id="timer-progress"></circle>
+                  </svg>
+                  <div class="timer-text-overlay">
+                    <div class="timer-clock" id="timer-display">25:00</div>
+                    <div class="timer-status" id="timer-state-label">ZEN SPACE IDLE</div>
+                  </div>
+                </div>
+
+                <div class="focus-controls">
+                  <div class="timer-picker" id="timer-picker-group">
+                    <button class="picker-btn active" data-time="15">15m</button>
+                    <button class="picker-btn" data-time="25">25m</button>
+                    <button class="picker-btn" data-time="45">45m</button>
+                    <button class="picker-btn" data-time="60">60m</button>
+                  </div>
+                  
+                  <div class="zen-mode-toggle-row">
+                    <span class="zen-label">
+                      <strong>Enable Deep Zen Mode</strong><br>
+                      <span class="text-secondary text-xs">Run optimizer & close background resource-hogs automatically</span>
+                    </span>
+                    <label class="switch">
+                      <input type="checkbox" id="chk-zen-mode" checked>
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+
+                  <div class="timer-action-buttons">
+                    <button id="btn-timer-start" class="btn btn-primary btn-glow btn-wide">Start Focus Session</button>
+                    <button id="btn-timer-stop" class="btn btn-danger btn-wide" style="display: none;">Cancel Session</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Binaural Soundscapes Synth Card -->
+              <div class="glass-card soundscape-card">
+                <h3 class="card-title">Binaural Soundscapes</h3>
+                <p class="card-desc">Programmatic synthesized audio frequencies designed to stimulate focus.</p>
+                <div class="soundscape-presets">
+                  <button class="sound-preset-btn active" data-preset="none">Mute</button>
+                  <button class="sound-preset-btn" data-preset="binaural">Focus Beats</button>
+                  <button class="sound-preset-btn" data-preset="rain">Rainfall</button>
+                  <button class="sound-preset-btn" data-preset="brown-noise">Brown Noise</button>
+                </div>
+                <div class="volume-slider-row">
+                  <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" class="text-secondary">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                  </svg>
+                  <input type="range" id="soundscape-volume" min="0" max="100" value="50">
+                  <span class="range-val" id="soundscape-volume-val">50%</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Focus Column 2 -->
+            <div class="focus-col">
+              <!-- Task Checklist -->
+              <div class="glass-card focus-tasks-card">
+                <div class="task-card-header">
+                  <div>
+                    <h3 class="card-title">Today's Focus Targets</h3>
+                    <p class="card-desc">Tasks will sync instantly to your Desktop Widget.</p>
+                  </div>
+                </div>
+
+                <div class="task-input-row">
+                  <input type="text" id="txt-new-task" placeholder="Add a vital milestone for today...">
+                  <button id="btn-add-task" class="btn btn-secondary">+</button>
+                </div>
+
+                <ul class="task-list" id="task-checklist">
+                  <!-- Javascript populated tasks -->
+                </ul>
+              </div>
+
+              <!-- Distraction Shield Warning Card -->
+              <div class="glass-card distraction-shield-card">
+                <div class="shield-header">
+                  <h3 class="card-title">Distraction Shield</h3>
+                  <span class="shield-status-badge status-secure" id="shield-badge">SECURE</span>
+                </div>
+                <p class="card-desc">Monitors background execution states for distracting programs during focus sessions.</p>
+                
+                <div class="shield-scan-status-box" id="shield-scan-status">
+                  <span class="shield-pulse-dot"></span>
+                  <span class="shield-scan-text">Shield monitoring inactive. Start focus to scan.</span>
+                </div>
+                
+                <div class="detected-distractions-container" id="distraction-warning-box" style="display: none;">
+                  <h4 class="distraction-alert-title">Distracting Applications Active:</h4>
+                  <ul class="distraction-list" id="detected-apps-list">
+                    <!-- Populated programmatically -->
+                  </ul>
+                  <button id="btn-shield-clean" class="btn btn-danger btn-wide btn-glow" style="margin-top: 14px;">Mute Distractions</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- SECTION 4: SETTINGS & WIDGET CONFIG -->
+        <section id="tab-settings" class="tab-content animate-fade-in">
+          <div class="view-header">
+            <div>
+              <h1 class="view-title">Preferences</h1>
+              <p class="view-subtitle">Customize application settings and desktop widgets overlay.</p>
+            </div>
+          </div>
+
+          <div class="settings-grid">
+            <!-- Desktop Widget Customizer -->
+            <div class="glass-card widget-config-card">
+              <h3 class="card-title">Desktop Widget Overlay</h3>
+              <p class="card-desc">Configure visual styling and interactions of the desktop-pinned clock/todo widgets.</p>
+
+              <div class="settings-control-group">
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-title">Widget Transparency Lock</span>
+                    <span class="setting-desc">Ignore mouse events (click-through to desktop icons)</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="chk-widget-clickthrough" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-title">Widget Panel Opacity</span>
+                    <span class="setting-desc">Adjust backing transparency opacity of the widget card</span>
+                  </div>
+                  <div class="range-slider-container">
+                    <input type="range" id="rng-widget-opacity" min="20" max="100" value="90">
+                    <span class="range-val" id="lbl-widget-opacity">90%</span>
+                  </div>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-title">Show Live Telemetry</span>
+                    <span class="setting-desc">Include CPU/RAM optimization index on the widget overlay</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="chk-widget-telemetry" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-title">Show Todays Tasks</span>
+                    <span class="setting-desc">Include focus checklist directly on the widget panel</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="chk-widget-tasks" checked>
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+
+                <div class="setting-row">
+                  <div class="setting-info">
+                    <span class="setting-title">Widget Theme Color</span>
+                    <span class="setting-desc">Accent glowing color used on the desktop widget</span>
+                  </div>
+                  <div class="color-palette-picker">
+                    <button class="color-dot active" data-color="#00f0ff" style="background-color: #00f0ff;" title="Cyan"></button>
+                    <button class="color-dot" data-color="#ff7b00" style="background-color: #ff7b00;" title="Amber"></button>
+                    <button class="color-dot" data-color="#bd00ff" style="background-color: #bd00ff;" title="Purple"></button>
+                    <button class="color-dot" data-color="#00ff66" style="background-color: #00ff66;" title="Emerald"></button>
+                    <button class="color-dot" data-color="#ff0055" style="background-color: #ff0055;" title="Neon Pink"></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- About Zenith Desk -->
+            <div class="glass-card system-info-card">
+              <h3 class="card-title">System Diagnostics</h3>
+              <p class="card-desc">Technical parameters of the Zenith Desk platform.</p>
+
+              <div class="diag-details">
+                <div class="diag-row">
+                  <span>Zenith Engine Status:</span>
+                  <span class="diag-status-green">ONLINE</span>
+                </div>
+                <div class="diag-row">
+                  <span>Application Uptime:</span>
+                  <span id="diag-uptime">0h 0m</span>
+                </div>
+                <div class="diag-row">
+                  <span>OS Architecture:</span>
+                  <span id="diag-os">Windows (CommonJS)</span>
+                </div>
+                <div class="diag-row">
+                  <span>Settings Path:</span>
+                  <span class="diag-text-path" id="diag-settings-path">.../settings.json</span>
+                </div>
+              </div>
+
+              <div class="about-zenith-box">
+                <p>Zenith Desk uses intelligent local heuristics and automatic system registry sweeps to remove Windows background overhead and declutter desktop folders, optimizing CPU cycles during active workflows.</p>
+                <div class="author-credits">Version 1.0.0 &bull; Powered by Antigravity</div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="soundEngine.js"></script>
+  <script src="renderer.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+/* ZENITH DESK WIDGET STYLING */
+
+:root {
+  --bg-widget: rgba(10, 12, 18, 0.45);
+  --border-color: rgba(255, 255, 255, 0.05);
+  --glow-color: #00f0ff;
+  
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.65);
+  --text-muted: rgba(255, 255, 255, 0.4);
+  
+  --font-display: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+  
+  --transition-fast: all 0.2s ease;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+body {
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Card Container with custom border glow */
+.widget-panel {
+  width: 100%;
+  height: 100%;
+  background: var(--bg-widget);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5),
+              inset 0 0 1px rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  animation: widgetEntrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  position: relative;
+}
+
+/* Accent Glow Lines depending on settings color */
+.widget-panel::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 30px;
+  right: 30px;
+  height: 1.5px;
+  background: linear-gradient(90deg, transparent, var(--glow-color), transparent);
+  filter: drop-shadow(0 0 4px var(--glow-color));
+}
+
+@keyframes widgetEntrance {
+  from { opacity: 0; transform: translateY(15px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Header & Clock */
+.widget-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.clock-row {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.digital-clock {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 38px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #ffffff 60%, var(--text-secondary));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+}
+
+.ampm {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--glow-color);
+  text-shadow: 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+.date-row {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 400;
+  margin-top: 2px;
+  letter-spacing: 0.02em;
+}
+
+.day-text {
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-color), rgba(255,255,255,0.01));
+}
+
+/* Widget Sections */
+.widget-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.section-title svg {
+  opacity: 0.7;
+}
+
+/* Focus Session Card widget */
+.timer-card-widget {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.widget-timer-clock {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-weight: 700;
+  color: #ff9d00;
+  text-shadow: 0 0 8px rgba(255, 157, 0, 0.35);
+}
+
+.widget-timer-progress-bg {
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5px;
+  overflow: hidden;
+}
+
+.widget-timer-progress-fill {
+  height: 100%;
+  background: #ff9d00;
+  border-radius: 1.5px;
+  transition: width 1s linear;
+  box-shadow: 0 0 6px #ff9d00;
+}
+
+/* Denser Task Checklist styles */
+.widget-task-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 180px;
+  overflow-y: auto;
+}
+
+.widget-task-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255,255,255,0.02);
+  border-radius: 6px;
+  padding: 8px 12px;
+  transition: var(--transition-fast);
+}
+
+.widget-task-item.completed {
+  opacity: 0.55;
+  border-color: transparent;
+}
+
+.widget-task-checkbox {
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  cursor: pointer;
+}
+
+.widget-task-text {
+  font-size: 11.5px;
+  line-height: 1.4;
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.widget-task-item.completed .widget-task-text {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* Telemetry Mini Bars */
+.telemetry-bar-row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.telemetry-bar-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.bar-lbl {
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  width: 28px;
+}
+
+.bar-bg {
+  flex: 1;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  background: var(--glow-color);
+  border-radius: 2px;
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 6px var(--glow-color);
+}
+
+.bar-val {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-primary);
+  width: 30px;
+  text-align: right;
+}
+
+/* Footer & Hints */
+.widget-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-color);
+  padding-top: 12px;
+  font-size: 9px;
+  color: var(--text-muted);
+}
+
+.footer-credits {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.footer-hint {
+  font-weight: 400;
+}
